@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback } from 'react';
 import { proofService, CompressionOptions } from '@/services/proofService';
 import { useToast } from './useToast';
 
@@ -27,10 +27,13 @@ interface UseProofUploadReturn {
   isCompressing: boolean;
   uploadedProofs: UploadedProof[];
   errors: string[];
-  handleFileCapture: (file: File) => Promise<void>;
-  handleCameraCapture: (canvas: HTMLCanvasElement) => Promise<void>;
+  // eslint-disable-next-line no-unused-vars
+  handleFileCapture: (_file: File) => Promise<void>;
+  // eslint-disable-next-line no-unused-vars
+  handleCameraCapture: (_canvas: HTMLCanvasElement) => Promise<void>;
   clearUploadedProofs: () => void;
-  removeProof: (filename: string) => void;
+  // eslint-disable-next-line no-unused-vars
+  removeProof: (_filename: string) => void;
 }
 
 /**
@@ -49,7 +52,6 @@ export function useProofUpload({
   const [uploadedProofs, setUploadedProofs] = useState<UploadedProof[]>([]);
   const [errors, setErrors] = useState<string[]>([]);
   const { toast } = useToast();
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileCapture = useCallback(
     async (file: File) => {

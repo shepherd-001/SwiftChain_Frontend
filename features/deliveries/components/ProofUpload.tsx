@@ -7,7 +7,6 @@ import clsx from 'clsx';
 
 interface ProofUploadProps {
   deliveryId: string;
-  onUploadComplete?: () => void;
   maxSizeMB?: number;
 }
 
@@ -16,11 +15,7 @@ interface ProofUploadProps {
  * Supports both camera capture and file upload with automatic image compression.
  * Follows the Strict Layered Architecture: Component -> Hook -> Service.
  */
-export function ProofUpload({
-  deliveryId,
-  onUploadComplete,
-  maxSizeMB = 5,
-}: ProofUploadProps) {
+export function ProofUpload({ deliveryId, maxSizeMB = 5 }: ProofUploadProps) {
   const {
     uploadProgress,
     compressionProgress,
