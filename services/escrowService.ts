@@ -34,6 +34,21 @@ export interface ApiResponse<T> {
   data?: T;
 }
 
+export interface LockEscrowParams {
+  deliveryId: string;
+  amount: number;
+  currency: string;
+  walletAddress: string;
+}
+
+export interface LockEscrowResponse {
+  success: boolean;
+  message: string;
+  escrowId: string;
+  transactionHash: string;
+  lockedAmount: string;
+}
+
 /**
  * escrowService — responsible for all escrow-related API communication.
  * The hook calls this; components never call this directly.
@@ -58,6 +73,14 @@ export const escrowService = {
     const { data } = await axios.post<ApiResponse<void>>(
       `${API_BASE_URL}/api/deliveries/${deliveryId}/confirm`,
       { walletAddress }
+    );
+    return data;
+  },
+
+  async lockEscrow(params: LockEscrowParams): Promise<LockEscrowResponse> {
+    const { data } = await axios.post<LockEscrowResponse>(
+      `${API_BASE_URL}/api/escrow/lock`,
+      params
     );
     return data;
   },
